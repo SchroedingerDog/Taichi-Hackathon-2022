@@ -9,7 +9,7 @@
 
 $$\begin{aligned} (r, \theta, \phi) &\sim \mathcal{J} \vert {\Psi_{nlm}} \vert ^2 \\ \mathcal{J} &= r^2\sin{\theta} \end{aligned}$$  
 
-![Wave function 3D illustration](/pic/eigenstate_4_3_1.png)
+三维波函数![Wave function 3D illustration](/pic/eigenstate_4_3_1.png)
 &emsp;&emsp;MCMC是一种自适应建议分布的重要性采样过程，建议分布在每抽样出一个点后都会自适应改变，每一步的接受与拒绝都会影响下一步的采样  
 
 ![MCMC and Adaptive Proposals](/pic/ImportanceAndMCMC.png)
