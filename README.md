@@ -7,9 +7,11 @@
 ## 项目介绍：
 &emsp;&emsp;对于高维参数的样本点进行采样，普通的接受-拒绝采样法效率是很低的。而类氢原子的电子云分布就是一个由空间波函数决定的三维参数抽样点。  
 
-$$\begin{aligned}
+$$\begin{aligned} 
+
 (r, \theta, \phi) &\sim \mathcal{J} \vert {\Psi_{nlm}} \vert ^2 \\
-\mathcal{J} &= r^2\sin{\theta}
+\mathcal{J} &= r^2\sin{\theta} \\
+
 \end{aligned}$$
 ![Wave function 3D illustration](/pic/eigenstate_4_3_1.png)
 &emsp;&emsp;MCMC是一种自适应建议分布的重要性采样过程，建议分布在每抽样出一个点后都会自适应改变，每一步的接受与拒绝都会影响下一步的采样  
