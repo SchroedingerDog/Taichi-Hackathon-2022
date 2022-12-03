@@ -24,5 +24,8 @@ $$\begin{aligned} (r, \theta, \phi) &\sim \mathcal{J} \vert {\Psi_{nlm}} \vert ^
 ![MCMC and Adaptive Proposals](/pic/ImportanceAndMCMC.png)
 马尔科夫链达到稳态分布即是目标分布。
 ![Markov chain Monte Carlo sampling using random walk](/pic/MarkovChainAndRandomWalk.png)  
+
+&emsp;&emsp;MCMC算法的部署设计![mcmc_implementation](pic/mcmc_sampling.png)  
+
 &emsp;&emsp;由于马尔科夫链的状态转移过程是串行的，如何对MCMC采样过程进行加速是一个重要问题。有一种显而易见的近似并行方法，那就是同时执行多条链。![mc_1](/pic/ParallelChains.png)  
 &emsp;&emsp;与一条总长度为$M*N$的马尔科夫链$[x_1,x_2,\dots,x_{MN}]$相比，只有单条链里抽样出的点$[x_1^m,x_2^m,\dots,x_N^m]$是有相关性的，并行的链之间的相关性不高，可以用Pearson相关系数来定量分析。
