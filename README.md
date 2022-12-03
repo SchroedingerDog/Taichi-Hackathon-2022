@@ -27,5 +27,31 @@ $$\begin{aligned} (r, \theta, \phi) &\sim \mathcal{J} \vert {\Psi_{nlm}} \vert ^
 
 &emsp;&emsp;MCMC算法的部署设计![mcmc_implementation](pic/mcmc_sampling.png)  
 
-&emsp;&emsp;由于马尔科夫链的状态转移过程是串行的，如何对MCMC采样过程进行加速是一个重要问题。有一种显而易见的近似并行方法，那就是同时执行多条链。![mc_1](/pic/ParallelChains.png)  
+&emsp;&emsp;由于马尔科夫链的状态转移过程是串行的，如何对MCMC采样过程进行加速是一个重要问题。有一种显而易见的近似并行方法，那就是同时执行多条链。![mc_1](/pic/ParallelChains.png) 
 &emsp;&emsp;与一条总长度为$M*N$的马尔科夫链$[x_1,x_2,\dots,x_{MN}]$相比，只有单条链里抽样出的点$[x_1^m,x_2^m,\dots,x_N^m]$是有相关性的，并行的链之间的相关性不高，可以用Pearson相关系数来定量分析。
+
+## Uniform Sampling in Ball
+&emsp;&emsp;在球坐标系下进行随机游走，需要生成半径为$a$的圆球内的均匀采样。首选，找到参数 $r,\theta,\phi$ 的累积分布函数
+$$\begin{cases}
+cdf(r)=\frac{r^3}{a^3} \\
+cdf(\theta)=\frac{1-\cos{\theta}}{2} \\
+cdf(\phi)=\frac{\phi}{2 \pi}
+\end{cases}$$  
+
+然后，生成三个均匀分布 $\xi_1,\xi_2,\xi_3  \sim  U(0,1)$ 带入累积分布函数的反函数就得到参数 $r,\theta,\phi$ 的抽样结果
+$$\begin{cases}
+r=a\sqrt[3]{\xi_1} \in [0,a)  \\
+\theta=\arccos{(1-2\xi_2)} \in [0,\pi) \\
+\phi=2\pi\xi_3 \in [0,2\pi)
+\end{cases}$$ 
+
+最后还原到直角坐标得到抽样点
+$$\begin{cases}
+x=2a\sqrt[3]{\xi_1}  \cdot \sqrt{\xi_2(1-\xi_2)}  \cdot \cos{(2\pi\xi_3)} \\
+y=2a\sqrt[3]{\xi_1}  \cdot \sqrt{\xi_2(1-\xi_2)}  \cdot \sin{(2\pi\xi_3)} \\
+z=2a\sqrt[3]{\xi_1} (1-2\xi_2)
+\end{cases}$$  
+效果如下![3d_ball](pic/torch_accept_reject_ball.png)
+
+## Pytorch框架下的电子云采样效果
+![3d_cloud](pic/torch_accept_reject.png)
