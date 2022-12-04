@@ -93,6 +93,8 @@ class MetropolisHasting_1D:
     --------------------------------------------
     Attributes:
         f: callable -> The desired distribution.
+        q: callable -> The transition pdf T(i, j).
+        rvs: callable -> A random walker which generates a new candidate.
     """
 
     def __init__(
